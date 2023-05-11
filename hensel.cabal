@@ -17,17 +17,28 @@ extra-source-files:  README.md
 cabal-version:       >=1.10
 
 library
-  -- exposed-modules:
+  exposed-modules:
+    Hensel.Options
+    Hensel.Data.Field
+    Hensel.Data.Ring
+    Hensel.Data.Polynomial
+    Hensel.Algorithms.Associator
+    Hensel.Algorithms.Euclid
+    Hensel.Algorithms.Hensel
+    Hensel.Algorithms.BaseField.Zassenhaus
   -- other-modules:
   -- other-extensions:
   build-depends:       base >=4.12 && <4.13
+                     , optparse-applicative
   hs-source-dirs:      src
   default-language:    Haskell2010
 
-executable decompositions
+executable runhensel
   main-is:             Main.hs
   -- other-modules:
   -- other-extensions:
   build-depends:       base >=4.12 && <4.13
+                     , optparse-applicative
+                     , hensel
   hs-source-dirs:      .
   default-language:    Haskell2010
