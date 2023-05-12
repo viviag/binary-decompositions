@@ -16,7 +16,13 @@ class RingOver char where
   toBaseField :: R char p -> F char
 
 data R (char :: Nat) (pow :: Nat) = R Integer
-  deriving (Eq, Show)
+
+instance (KnownNat char, KnownNat pow) => Eq (R char pow) where
+  R a == R b =
+    a `mod` ((natVal (Proxy @char)) ^ (natVal (Proxy @pow))) == b `mod` ((natVal (Proxy @char)) ^ (natVal (Proxy @pow)))
+
+instance (KnownNat char, KnownNat pow) => Show (R char pow) where
+  show (R a) = show $ a `mod` ((natVal (Proxy @char)) ^ (natVal (Proxy @pow)))
 
 instance (KnownNat char, KnownNat pow) => Num (R char pow) where
   R a + R b = R ((a + b) `mod` ((natVal (Proxy @char)) ^ (natVal (Proxy @pow))))

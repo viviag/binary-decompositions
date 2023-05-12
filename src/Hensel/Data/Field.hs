@@ -15,7 +15,13 @@ class Num a => Field a where
 
 -- FIXME: prevent from non-prime char and too big integers.
 data F (char :: Nat) = F Integer
-  deriving (Eq, Show)
+
+instance KnownNat char => Eq (F char) where
+  F a == F b =
+    a `mod` ((natVal (Proxy @char))) == b `mod` ((natVal (Proxy @char)))
+
+instance KnownNat char => Show (F char) where
+  show (F a) = show $ a `mod` ((natVal (Proxy @char)))
 
 instance KnownNat char => Num (F char) where
   F a + F b = F ((a + b) `mod` (natVal (Proxy @char)))
