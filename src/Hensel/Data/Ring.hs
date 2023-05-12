@@ -20,6 +20,9 @@ type F (char :: Nat) = R (char :: Nat) (1 :: Nat)
 class Num a => Field a where
   invert :: a -> a
 
+class Num a => LocalRing a where
+  invertOrNot :: a -> Maybe a
+
 class RingOver char where
   toBaseField :: R char p -> F char
 
@@ -44,12 +47,24 @@ instance (KnownNat char, KnownNat pow) => Num (R char pow) where
 instance KnownNat char => RingOver char where
   toBaseField (R a) = R $ a `mod` (natVal (Proxy @char))
 
-(^^^) :: Field a => a -> Integer -> a
+(^^^) :: Num a => a -> Integer -> a
 a ^^^ b = if b > 0
   then a * (a ^^^ (b-1))
   else if b == 0
     then 1
-    else (invert a) ^^^ (-b)
+    else error "^^^ is not defined for negative powers."
 
 instance KnownNat char => Field (F char) where
   invert a = a ^^^ ((natVal (Proxy @char)) - 2)
+
+instance (KnownNat char, KnownNat pow) => LocalRing (R char pow) where
+  -- Commutative ring with unity is local if and only if its elements are either invertible or contained in the Jacobson radical.
+  -- Zn is local with maximal ideal (p) being nilpotent.
+  -- Hence a criterion for a non-invertible element
+  invertOrNot a = invertOrNot' 1 a
+    where
+      invertOrNot' b a = if b*a == fromInteger 0
+        then Nothing
+        else if b*a == fromInteger 1
+          then Just b
+          else invertOrNot' (b*a) a

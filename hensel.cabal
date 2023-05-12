@@ -23,6 +23,7 @@ library
     Hensel.Data.Ring
     Hensel.Data.Polynomial
     Hensel.Algorithms.Associator
+    Hensel.Algorithms.Division
     Hensel.Algorithms.Euclid
     Hensel.Algorithms.Hensel
     Hensel.Algorithms.Field.Zassenhaus
