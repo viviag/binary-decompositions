@@ -3,9 +3,9 @@ module Hensel.Options where
 import Options.Applicative
 
 data Options = Options {
-    optionsCharacteristic :: Int
-  , optionsPower :: Int
-  , optionsDegree :: Int
+    optionsCharacteristic :: Integer
+  , optionsPower :: Integer
+  , optionsDegree :: Integer
   } deriving (Show, Eq)
 
 optionsParser :: Parser Options

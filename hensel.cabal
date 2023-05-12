@@ -25,7 +25,7 @@ library
     Hensel.Algorithms.Associator
     Hensel.Algorithms.Euclid
     Hensel.Algorithms.Hensel
-    Hensel.Algorithms.BaseField.Zassenhaus
+    Hensel.Algorithms.Field.Zassenhaus
   -- other-modules:
   -- other-extensions:
   build-depends:       base >=4.12 && <4.13
