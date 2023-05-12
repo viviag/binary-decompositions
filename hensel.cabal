@@ -19,11 +19,9 @@ cabal-version:       >=1.10
 library
   exposed-modules:
     Hensel.Options
-    Hensel.Data.Common
     Hensel.Data.Field
     Hensel.Data.Ring
-    Hensel.Data.RPolynomial
-    Hensel.Data.FPolynomial
+    Hensel.Data.Polynomial
     Hensel.Algorithms.Associator
     Hensel.Algorithms.Euclid
     Hensel.Algorithms.Hensel
