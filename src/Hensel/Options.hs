@@ -1,11 +1,13 @@
 module Hensel.Options where
 
+import GHC.TypeLits
+
 import Options.Applicative
 
 data Options = Options {
-    optionsCharacteristic :: Integer
-  , optionsPower :: Integer
-  , optionsDegree :: Integer
+    optionsCharacteristic :: Natural
+  , optionsPower :: Natural
+  , optionsDegree :: Int
   } deriving (Show, Eq)
 
 optionsParser :: Parser Options

@@ -6,7 +6,6 @@
 module Hensel.Data.Polynomial where
 
 import Hensel.Data.Ring
-import Hensel.Data.Field
 
 import GHC.TypeLits
 
