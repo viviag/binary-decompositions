@@ -20,7 +20,7 @@ type F (char :: Nat) = R (char :: Nat) (1 :: Nat)
 class Num a => Field a where
   invert :: a -> a
 
-class Num a => LocalRing a where
+class Num a => ArtinianLocalRing a where
   invertOrNot :: a -> Maybe a
 
 class RingOver char where
@@ -57,7 +57,7 @@ a ^^^ b = if b > 0
 instance KnownNat char => Field (F char) where
   invert a = a ^^^ ((natVal (Proxy @char)) - 2)
 
-instance (KnownNat char, KnownNat pow) => LocalRing (R char pow) where
+instance (KnownNat char, KnownNat pow) => ArtinianLocalRing (R char pow) where
   -- Commutative ring with unity is local if and only if its elements are either invertible or contained in the Jacobson radical.
   -- Zn is local with maximal ideal (p) being nilpotent.
   -- Hence a criterion for a non-invertible element
